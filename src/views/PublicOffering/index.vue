@@ -220,10 +220,10 @@ const allPossible = () => {
       }
 
       .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
         width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 9rem);
+        grid-gap: 2rem;
       }
     }
   }
