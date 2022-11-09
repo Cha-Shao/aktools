@@ -41,14 +41,14 @@ watch(() => props.member, (newVal, oldVal) => {
 
 <template>
   <div class="avatar">
-    <img :src="`/character/头像_${props.member?.name}.png`" alt="avatar" :style="{ border: `7px solid ${borderColor}` }">
+    <img :src="`/character/头像_${props.member?.name}.png`" alt="avatar" :style="{ border: `7px solid ${borderColor}` }" class="avatar">
     <p class="name">{{ props.member?.name }}</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .avatar {
-  img {
+  .avatar {
     width: 5rem;
     height: 5rem;
   }

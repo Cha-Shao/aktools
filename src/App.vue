@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { useRouter } from "vue-router";
 
 import Header from './components/Header/index.vue';
@@ -28,11 +27,13 @@ const router = useRouter()
 <style scoped lang="scss">
 .root {
   backdrop-filter: blur(12px);
-  min-height: 100%;
-  .header{
+  min-height: 100vh;
+
+  .header {
     position: absolute;
     left: 1.5rem;
     top: 1.5rem;
+    width: calc(100% - 3rem);
   }
 }
 </style>

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import TagVue from '../../components/Header/Tag.vue';
+import SwitchVue from '../../components/Switch.vue';
 import CharacterAvatar from '../../components/CharacterAvatar.vue'
+import CharacterList from '../../components/CharacterList.vue'
 import lodash from 'lodash'
 
 import { characters } from '../../character'
@@ -125,6 +127,8 @@ const allPossible = () => {
     finalResult.value = lodash.concat(finalResult.value, [thisRes])
   });
 }
+
+const listMode = ref(false)
 </script>
 
 <template>
@@ -170,6 +174,10 @@ const allPossible = () => {
           </TagVue>
         </div>
       </div>
+      <div class="setting">
+        <p style="margin-right: 2.5rem;">极简模式</p>
+        <SwitchVue :value="listMode" @click="listMode = !listMode" />
+      </div>
       <div v-for="(combsData, i) in combs" :key="i">
         <!-- 不渲染空 -->
         <div class="part" v-if="finalResult[i] != null">
@@ -178,8 +186,11 @@ const allPossible = () => {
               <TagVue v-for="(tagsData, j) in combsData">{{ tagsData }}</TagVue>
             </div>
           </div>
-          <div class="avatars">
-            <CharacterAvatar v-for="(data, j) in finalResult[i]" :key="j" :member="data" />
+          <div class="result" :style="[
+            listMode == false ? 'grid-template-columns: repeat(auto-fill, calc(6rem + 7px));display: grid;grid-gap: 2rem;' : 'display: flex;flex-wrap: wrap;'
+          ]">
+            <CharacterAvatar v-if="listMode == false" v-for="(data, j) in finalResult[i]" :key="j" :member="data" />
+            <CharacterList v-else v-for="(data, j) in finalResult[i]" :key="j + 1" :member="data" />
           </div>
         </div>
       </div>
@@ -190,7 +201,7 @@ const allPossible = () => {
 <style lang="scss" scoped>
 .public-offering {
   .title {
-    background-color: #00000080;
+    background-color: #00000088;
     border-top: 6px solid #f29800;
     padding: 1rem 7rem;
     margin-bottom: 2rem;
@@ -202,12 +213,12 @@ const allPossible = () => {
   }
 
   .main {
-    background-color: #ffffff4d;
+    background-color: #ffffff60;
     padding: 0.5rem 2rem;
 
     .part {
       margin: 2rem 0;
-      background: #f8f8f8e0;
+      background: #f8f8f8d0;
       padding: 1rem 3rem;
       box-shadow: 0 0 7px #0000004d;
       display: flex;
@@ -226,12 +237,16 @@ const allPossible = () => {
         grid-gap: 2rem;
       }
 
-      .avatars {
+      .result {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, calc(5rem + 7px));
-        grid-gap: 2rem;
       }
+    }
+
+    .setting {
+      display: flex;
+      color: white;
+      font-size: 1.17rem;
+      align-items: center;
     }
   }
 }
