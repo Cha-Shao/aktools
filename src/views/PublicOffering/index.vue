@@ -178,7 +178,7 @@ const allPossible = () => {
               <TagVue v-for="(tagsData, j) in combsData">{{ tagsData }}</TagVue>
             </div>
           </div>
-          <div class="tags">
+          <div class="avatars">
             <CharacterAvatar v-for="(data, j) in finalResult[i]" :key="j" :member="data" />
           </div>
         </div>
@@ -223,6 +223,13 @@ const allPossible = () => {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, 9rem);
+        grid-gap: 2rem;
+      }
+
+      .avatars {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, calc(5rem + 7px));
         grid-gap: 2rem;
       }
     }
